@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Tab?>
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.dbgoo.AddTabsController"
+      fx:id="vb">
+   <TabPane fx:id="tabPane"/>
+</VBox>

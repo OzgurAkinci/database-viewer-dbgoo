@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox id="vbox" VBox.vgrow="ALWAYS" maxHeight="1.7976931348623157E308"
+      fx:controller="com.example.dbgoo.LeftSideController"
+      xmlns:fx="http://javafx.com/fxml">
+    <!--<Label fx:id="lblTest1" text="History" />-->
+    <ListView fx:id="listView" VBox.vgrow="ALWAYS" maxHeight="1.7976931348623157E308"  />
+</VBox>

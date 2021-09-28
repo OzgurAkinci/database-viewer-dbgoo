@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import org.fxmisc.richtext.CodeArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
+      xmlns="http://javafx.com/javafx/8.0.121"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.dbgoo.InSideController">
+    <children>
+        <HBox HBox.hgrow="ALWAYS">
+            <VBox>
+                <padding>
+                    <Insets bottom="2.0" left="2.0" right ="2.0" top="2.0"/>
+                </padding>
+                <fx:define>
+                    <Image requestedWidth="16" requestedHeight="16" fx:id="executeBtn" url="@execute_btn.png"/>
+                </fx:define>
+                <Button text="Execute (Ctrl+Enter)" minWidth="20" fx:id="executeQueryButton">
+                    <graphic>
+                        <ImageView image="$executeBtn"/>
+                    </graphic>
+                </Button>
+            </VBox>
+            <VBox>
+                <padding>
+                    <Insets bottom="2.0" left="2.0" right ="2.0" top="2.0"/>
+                </padding>
+                <fx:define>
+                    <Image requestedWidth="16" requestedHeight="16" fx:id="TablesQueryBtn" url="@energy.png"/>
+                </fx:define>
+                <Button text="All Tables" minWidth="20" fx:id="executeListAllTablesButton">
+                    <graphic>
+                        <ImageView image="$TablesQueryBtn"/>
+                    </graphic>
+                </Button>
+            </VBox>
+            <VBox>
+                <padding>
+                    <Insets bottom="2.0" left="2.0" right ="2.0" top="2.0"/>
+                </padding>
+                <fx:define>
+                    <Image requestedWidth="16" requestedHeight="16" fx:id="CodeBeautifyBtn" url="@code.png"/>
+                </fx:define>
+                <Button text="Beautify" minWidth="20" fx:id="executeCodeBeautifyBtn">
+                    <graphic>
+                        <ImageView image="$CodeBeautifyBtn"/>
+                    </graphic>
+                </Button>
+            </VBox>
+            <VBox>
+                <padding>
+                    <Insets bottom="2.0" left="2.0" right ="2.0" top="2.0"/>
+                </padding>
+                <ComboBox value="Connections" minWidth="150" fx:id="connectionsList"/>
+            </VBox>
+            <VBox>
+                <padding>
+                    <Insets bottom="2.0" left="2.0" right ="2.0" top="2.0"/>
+                </padding>
+                <ComboBox value="Schemas" minWidth="150" fx:id="schemaList"/>
+            </VBox>
+        </HBox>
+
+        <CodeArea prefHeight="200.0" prefWidth="200.0" fx:id="textArea"
+                  style="-fx-font-family: Consolas; -fx-highlight-fill: #222222; -fx-highlight-text-fill: #ffffff; -fx-text-fill: #222222; -fx-background-color:#ffffff;">
+        </CodeArea>
+        <TableView fx:id="tableView"
+                   VBox.vgrow="ALWAYS"/>
+        <TextArea prefHeight="50.0" prefWidth="200.0" fx:id="consoleTextArea"
+                  style="-fx-font-family: Consolas; -fx-highlight-fill: #222222; -fx-highlight-text-fill: #ffffff; -fx-text-fill: #222222; -fx-background-color:#ffffff;"
+                  text="" editable="false">
+        </TextArea>
+    </children>
+</VBox>
