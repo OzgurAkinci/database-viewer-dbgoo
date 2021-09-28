@@ -1,1 +1,1 @@
-# dbgoo
+# DbGoo - Database Viewer
