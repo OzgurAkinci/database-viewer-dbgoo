@@ -79,7 +79,7 @@ public class InSideController implements Initializable
         loadConnectionData();
         //TextArea
         KeyCodeCombination keyCodeCompination = new KeyCodeCombination(KeyCode.ENTER, KeyCombination.CONTROL_DOWN);
-        textArea.addEventFilter(KeyEvent.ANY, keyEvent -> {
+        textArea.addEventFilter(KeyEvent.KEY_PRESSED, keyEvent -> {
             if (keyCodeCompination.match(keyEvent)) {
                 buildData(textArea.getText());
             }
@@ -155,12 +155,7 @@ public class InSideController implements Initializable
             for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
                 final int j = i;
                 TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
-                col.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
-                    public ObservableValue<String> call(TableColumn.CellDataFeatures<ObservableList, String> param) {
-                        return new SimpleStringProperty(param.getValue().get(j) == null ? null : param.getValue().get(j).toString());
-                    }
-                });
-
+                col.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>) param -> new SimpleStringProperty(param.getValue().get(j) == null ? null : param.getValue().get(j).toString()));
                 tableView.getColumns().addAll(col);
             }
             while (rs.next()) {
@@ -190,6 +185,9 @@ public class InSideController implements Initializable
 
 
         JSONArray sqlHistoryDatas = AppUtil.getApplicationData("sql-history");
+        while(sqlHistoryDatas.length() > 15){
+            sqlHistoryDatas.remove(0);
+        }
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("sql", sql);
         jsonObject.put("date", df.format(cal.getTime()));
