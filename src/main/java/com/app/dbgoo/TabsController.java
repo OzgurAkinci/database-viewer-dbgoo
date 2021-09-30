@@ -17,10 +17,11 @@ public class TabsController implements Initializable {
     public RootController getRootController() {
         return rootController;
     }
-
     public void setRootController(RootController rootController) {
         this.rootController = rootController;
     }
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

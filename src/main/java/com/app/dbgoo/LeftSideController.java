@@ -3,9 +3,12 @@ import com.app.dbgoo.util.AppUtil;
 import com.app.dbgoo.util.CustomListViewSkin;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import javafx.scene.input.*;
+import javafx.scene.layout.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -21,14 +24,23 @@ public class LeftSideController implements Initializable {
 
     @FXML
     private ListView listView;
-    private final ObservableList<String> observableList = FXCollections.observableArrayList();
+    private final ObservableList<JSONObject> observableList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //listView.relocate(10, 210);
-        listView.setFixedCellSize(40);
-        listView.setPrefHeight(10 * 24 + 2);
+        //ListView
         listView.setCellFactory(customListViewSkin -> new CustomListViewSkin());
+        listView.setOnKeyPressed(e -> {
+            KeyCodeCombination copyKeyCodeCompination = new KeyCodeCombination(KeyCode.C, KeyCombination.CONTROL_ANY);
+            if (copyKeyCodeCompination.match(e)) {
+                JSONObject currentItemSelected = (JSONObject) listView.getSelectionModel().getSelectedItem();
+                String sql = currentItemSelected.getString("sql");
+
+                ClipboardContent content = new ClipboardContent();
+                content.putString(sql);
+                Clipboard.getSystemClipboard().setContent(content);
+            }
+        });
         loadSqlHistoryData();
     }
 
@@ -38,7 +50,11 @@ public class LeftSideController implements Initializable {
         for(int i=0; i<sqlHistoryDatas.length(); i++) {
             JSONObject sqlHistoryObject = sqlHistoryDatas.getJSONObject(i);
             String sql = sqlHistoryObject.getString("sql");
-            observableList.add(sql);
+            String date = sqlHistoryObject.getString("date");
+            JSONObject jo = new JSONObject();
+            jo.put("sql", sql);
+            jo.put("date", date);
+            observableList.add(jo);
         }
         listView.setItems(observableList);
     }

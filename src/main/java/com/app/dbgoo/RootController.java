@@ -23,4 +23,7 @@ public class RootController  implements Initializable {
     public void refreshQueryHistoryList () {
         this.leftSideLayoutController.loadSqlHistoryData();
     }
+
+    public void setAbc() {
+    }
 }

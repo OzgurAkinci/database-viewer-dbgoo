@@ -8,22 +8,15 @@
          xmlns:fx="http://javafx.com/fxml/1"
          fx:controller="com.app.dbgoo.MenuController" VBox.vgrow="NEVER" onKeyPressed="#handleKeyInput">
     <menus>
-        <Menu mnemonicParsing="false" text="File">
+        <Menu mnemonicParsing="false" text="Menu">
             <items>
-                <MenuItem mnemonicParsing="false" text="New" />
-                <MenuItem mnemonicParsing="false" text="Open…" />
-                <SeparatorMenuItem mnemonicParsing="false" />
-                <MenuItem mnemonicParsing="false" text="Close" />
-                <MenuItem mnemonicParsing="false" text="Save" />
-                <SeparatorMenuItem mnemonicParsing="false" />
-                <MenuItem mnemonicParsing="false" text="Preferences…" />
-                <SeparatorMenuItem mnemonicParsing="false" />
+                <MenuItem mnemonicParsing="false" text="About" />
                 <MenuItem mnemonicParsing="false" text="Quit" />
             </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Help">
+        <Menu mnemonicParsing="false" text="Configuration">
             <items>
-                <MenuItem mnemonicParsing="false" text="About DbGoo" />
+                <MenuItem mnemonicParsing="false" text="Connection Configuration" />
             </items>
         </Menu>
     </menus>
