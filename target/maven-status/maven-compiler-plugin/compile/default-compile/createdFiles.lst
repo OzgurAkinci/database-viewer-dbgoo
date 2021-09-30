@@ -1,6 +1,7 @@
 com\app\dbgoo\util\AppUtil.class
 com\app\dbgoo\LeftSideController.class
 com\app\dbgoo\MenuController.class
+com\app\dbgoo\ConfigurationController.class
 com\app\dbgoo\InSideController.class
 com\app\dbgoo\InSideController$4.class
 com\app\dbgoo\TabsController.class
@@ -10,7 +11,6 @@ com\app\dbgoo\RootController.class
 module-info.class
 com\app\dbgoo\constant\AppConstant.class
 com\app\dbgoo\util\CustomListViewSkin.class
-com\app\dbgoo\InSideController$5.class
 com\app\dbgoo\MainApplication.class
 com\app\dbgoo\util\TableUtils.class
 com\app\dbgoo\InSideController$3.class

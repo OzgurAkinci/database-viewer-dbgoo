@@ -1,15 +1,24 @@
 package com.app.dbgoo;
 
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 public class MenuController implements Initializable
@@ -17,42 +26,29 @@ public class MenuController implements Initializable
     @FXML
     private MenuBar menuBar;
 
-    /**
-     * Handle action related to "About" menu item.
-     *
-     * @param event Event on "About" menu item.
-     */
     @FXML
-    private void handleAboutAction(final ActionEvent event)
+    private void handleMenuAction(final ActionEvent event)
     {
-        provideAboutFunctionality();
-    }
-
-    /**
-     * Handle action related to input (in this case specifically only responds to
-     * keyboard event CTRL-A).
-     *
-     * @param event Input event.
-     */
-    @FXML
-    private void handleKeyInput(final InputEvent event)
-    {
-        if (event instanceof KeyEvent)
-        {
-            final KeyEvent keyEvent = (KeyEvent) event;
-            if (keyEvent.isControlDown() && keyEvent.getCode() == KeyCode.A)
-            {
-                provideAboutFunctionality();
-            }
+        System.out.println(event);
+        MenuItem menuItem = ((MenuItem) event.getSource());
+        if(menuItem.getId().equals("confMenu")) {
+            provideConfMenuFunctionality();
         }
     }
 
-    /**
-     * Perform functionality associated with "About" menu selection or CTRL-A.
-     */
-    private void provideAboutFunctionality()
+    private void provideConfMenuFunctionality()
     {
-        System.out.println("You clicked on About!");
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/Configuration.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("DB Goo - Database Configuration");
+            stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/icon.png"))));
+            stage.setScene(scene);
+            stage.show();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 

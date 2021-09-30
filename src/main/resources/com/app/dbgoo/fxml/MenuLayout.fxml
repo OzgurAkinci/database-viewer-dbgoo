@@ -6,7 +6,7 @@
 <MenuBar fx:id="menuBar"
          xmlns="http://javafx.com/javafx/8.0.121"
          xmlns:fx="http://javafx.com/fxml/1"
-         fx:controller="com.app.dbgoo.MenuController" VBox.vgrow="NEVER" onKeyPressed="#handleKeyInput">
+         fx:controller="com.app.dbgoo.MenuController" VBox.vgrow="NEVER">
     <menus>
         <Menu mnemonicParsing="false" text="Menu">
             <items>
@@ -14,9 +14,9 @@
                 <MenuItem mnemonicParsing="false" text="Quit" />
             </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Configuration">
+        <Menu mnemonicParsing="false" text="DB Configuration">
             <items>
-                <MenuItem mnemonicParsing="false" text="Connection Configuration" />
+                <MenuItem mnemonicParsing="false" fx:id="confMenu" onAction="#handleMenuAction" text="Connection Configuration" />
             </items>
         </Menu>
     </menus>
