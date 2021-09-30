@@ -9,7 +9,11 @@ import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.google.common.base.Charsets;
+import com.google.common.io.Resources;
+
 import java.io.*;
+import java.net.URL;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.regex.Matcher;
@@ -37,7 +41,13 @@ public class AppUtil {
                     + "|(?<COMMENT>" + COMMENT_PATTERN + ")"
     );
 
+    public static String getFileAsString(String jsonfilename) throws IOException {
+        URL url = Resources.getResource(jsonfilename);
+        return Resources.toString(url, Charsets.UTF_8);
+    }
+
     public static JSONObject readJsonFromFile(String fileName) throws IOException, ParseException {
+
         InputStream inputStreamObject = HelloApplication.class.getResourceAsStream(fileName);
 
         try {

@@ -3,23 +3,42 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class AddTabsController  {
+public class AddTabsController  implements Initializable {
     @FXML
     private TabPane tabPane;
 
-    public void initialize() throws IOException {
-        Tab tab = new Tab();
-        tab.setContent(FXMLLoader.load(getClass().getResource("InSideLayout.fxml")));
+    private RootController rootController;
+
+    public RootController getRootController() {
+        return rootController;
+    }
+
+    @FXML
+    private InSideController inSideLayoutController;
+
+    public void setRootController(RootController rootController) {
+        this.rootController = rootController;
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        inSideLayoutController.setAddTabsController(this);
+        /*Tab tab = new Tab();
+        try {
+            tab.setContent(FXMLLoader.load(getClass().getResource("/com/example/dbgoo/InSideLayout.fxml")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         tab.setText("Query Tab 1");
-        tabPane.getTabs().add(tab);
+        tabPane.getTabs().add(tab);*/
 
         Tab tab2 = new Tab();
         tab2.setText("+");
@@ -50,11 +69,5 @@ public class AddTabsController  {
         tab.setContent(FXMLLoader.load(getClass().getResource("InSideLayout.fxml")));
         tabPane.getTabs().add(tabPane.getTabs().size()-1, tab);
         tabPane.getSelectionModel().select(numTabs);
-    }
-
-    @FXML
-    private void listTabs() {
-        tabPane.getTabs().forEach(tab -> System.out.println(tab.getText()));
-        System.out.println();
     }
 }

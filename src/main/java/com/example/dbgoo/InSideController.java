@@ -21,20 +21,28 @@ import javafx.util.Callback;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.LineNumberFactory;
 import org.hibernate.engine.jdbc.internal.BasicFormatterImpl;
-import org.hibernate.engine.jdbc.internal.Formatter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.simple.parser.ParseException;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.*;
 
-import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
 
 public class InSideController implements Initializable
 {
+    private AddTabsController addTabsController;
+
+    public void setAddTabsController(AddTabsController addTabsController) {
+        this.addTabsController = addTabsController;
+    }
+
     @FXML
     private ComboBox<String> connectionsList;
     private String[] observableConnectionList = {"None"};
@@ -168,6 +176,35 @@ public class InSideController implements Initializable
         } catch (Exception e) {
             consoleTextArea.setText(e.getMessage());
         }
+
+        try{
+            addDataAndRefreshQueryHistory(sql);
+        }catch (Exception e){
+            consoleTextArea.setText("Error: " + e.getMessage());
+        }
+    }
+
+    public void addDataAndRefreshQueryHistory(String sql) throws IOException, ParseException {
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+
+
+        JSONArray sqlHistoryDatas = AppUtil.getApplicationData("sql-history");
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("sql", sql);
+        jsonObject.put("date", df.format(cal.getTime()));
+        sqlHistoryDatas.put(jsonObject);
+
+
+        JSONObject obj = AppUtil.readJsonFromFile("application.json");
+        obj.remove("sql-history");
+        obj.put("sql-history", sqlHistoryDatas);
+
+        PrintWriter prw= new PrintWriter("application.json");
+        prw.println(obj);
+        prw.close();
+
+        addTabsController.getRootController().refreshQueryHistoryList();
     }
 
     private void openConnection(String connectionName) throws SQLException {

@@ -91,6 +91,11 @@
             <artifactId>hibernate-core</artifactId>
             <version>5.4.10.Final</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>28.1-android</version>
+        </dependency>
     </dependencies>
 
     <build>
