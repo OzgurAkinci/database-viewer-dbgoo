@@ -1,6 +1,7 @@
 package com.example.dbgoo.util;
 
 import com.example.dbgoo.HelloApplication;
+import com.google.common.io.Files;
 import org.fxmisc.richtext.model.StyleSpans;
 import org.fxmisc.richtext.model.StyleSpansBuilder;
 import org.json.JSONArray;
@@ -42,34 +43,15 @@ public class AppUtil {
     );
 
     public static String getFileAsString(String jsonfilename) throws IOException {
-        URL url = Resources.getResource(jsonfilename);
-        return Resources.toString(url, Charsets.UTF_8);
+        return Files.asCharSource(new File(jsonfilename), Charsets.UTF_8).read();
     }
 
     public static JSONObject readJsonFromFile(String fileName) throws IOException, ParseException {
-
-        InputStream inputStreamObject = HelloApplication.class.getResourceAsStream(fileName);
-
         try {
-            BufferedReader streamReader = new BufferedReader(new InputStreamReader(inputStreamObject, "UTF-8"));
-            StringBuilder responseStrBuilder = new StringBuilder();
-
-            String inputStr;
-            while ((inputStr = streamReader.readLine()) != null)
-                responseStrBuilder.append(inputStr);
-
-            JSONObject jsonObject = new JSONObject(responseStrBuilder.toString());
-
-            //returns the json object
-            return jsonObject;
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+            return new JSONObject(getFileAsString("application.json"));
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
-
-        //if something went wrong, return null
         return null;
     }
 

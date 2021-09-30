@@ -4,6 +4,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
@@ -21,8 +22,8 @@ public class AddTabsController  implements Initializable {
         return rootController;
     }
 
-    @FXML
-    private InSideController inSideLayoutController;
+    //@FXML
+    //private InSideController inSideLayoutController;
 
     public void setRootController(RootController rootController) {
         this.rootController = rootController;
@@ -30,21 +31,17 @@ public class AddTabsController  implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        inSideLayoutController.setAddTabsController(this);
-        /*Tab tab = new Tab();
+        Tab addTabBtn = new Tab();
+        addTabBtn.setText("+");
+        addTabBtn.setId("addBtn");
+        addTabBtn.setClosable(false);
+        tabPane.getTabs().add(tabPane.getTabs().size(), addTabBtn);
+
         try {
-            tab.setContent(FXMLLoader.load(getClass().getResource("/com/example/dbgoo/InSideLayout.fxml")));
+            addDynamicTab();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        tab.setText("Query Tab 1");
-        tabPane.getTabs().add(tab);*/
-
-        Tab tab2 = new Tab();
-        tab2.setText("+");
-        tab2.setId("addBtn");
-        tab2.setClosable(false);
-        tabPane.getTabs().add(tabPane.getTabs().size(),tab2);
 
         tabPane.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<Tab>() {
@@ -52,7 +49,7 @@ public class AddTabsController  implements Initializable {
                     public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab t1) {
                         if(t1.getId() != null &&t1.getId().equals("addBtn")){
                             try {
-                                addTab();
+                                addDynamicTab();
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -63,10 +60,16 @@ public class AddTabsController  implements Initializable {
     }
 
     @FXML
-    private void addTab() throws IOException {
+    private void addDynamicTab() throws IOException {
         int numTabs = tabPane.getTabs().size()-1;
         Tab tab = new Tab("Query Tab "+(numTabs+1));
-        tab.setContent(FXMLLoader.load(getClass().getResource("InSideLayout.fxml")));
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/dbgoo/InSideLayout.fxml"));
+        InSideController inSideController = new InSideController();
+        inSideController.setAddTabsController(this);
+        fxmlLoader.setController(inSideController);
+
+        tab.setContent(fxmlLoader.load());
         tabPane.getTabs().add(tabPane.getTabs().size()-1, tab);
         tabPane.getSelectionModel().select(numTabs);
     }
