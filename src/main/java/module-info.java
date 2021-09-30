@@ -1,4 +1,4 @@
-module com.example.dbgoo {
+module com.app.dbgoo {
     requires javafx.controls;
     requires javafx.fxml;
 
@@ -10,6 +10,6 @@ module com.example.dbgoo {
     requires org.hibernate.orm.core;
     requires com.google.common;
 
-    opens com.example.dbgoo to javafx.fxml;
-    exports com.example.dbgoo;
+    opens com.app.dbgoo to javafx.fxml;
+    exports com.app.dbgoo;
 }
