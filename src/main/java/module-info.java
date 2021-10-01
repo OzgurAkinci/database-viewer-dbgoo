@@ -12,4 +12,5 @@ module com.app.dbgoo {
 
     opens com.app.dbgoo to javafx.fxml;
     exports com.app.dbgoo;
+    exports com.app.dbgoo.entity;
 }

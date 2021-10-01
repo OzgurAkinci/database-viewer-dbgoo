@@ -2,9 +2,28 @@
 
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.MenuBar?>
 <VBox
         AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
         xmlns="http://javafx.com/javafx/8.0.121"
         fx:controller="com.app.dbgoo.ConfigurationController"
         xmlns:fx="http://javafx.com/fxml/1">
+
+    <MenuBar fx:id="configurationMenuBar"
+             xmlns="http://javafx.com/javafx/8.0.121"
+             xmlns:fx="http://javafx.com/fxml/1" VBox.vgrow="NEVER">
+        <menus>
+            <Menu mnemonicParsing="false" text="Menu">
+                <items>
+                    <MenuItem mnemonicParsing="false" fx:id="newConnectionMenu" onAction="#handleNewConnectionMenuAction" text="New Connection" />
+                    <MenuItem mnemonicParsing="false" fx:id="closeConnectionsScreen" onAction="#handleNewConnectionMenuAction" text="Close" />
+                </items>
+            </Menu>
+        </menus>
+    </MenuBar>
+    <TableView fx:id="connectionListTableView" minWidth="700"
+               VBox.vgrow="ALWAYS" />
 </VBox>
