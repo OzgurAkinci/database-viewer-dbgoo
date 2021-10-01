@@ -8,13 +8,41 @@ public class ConnectionObj {
     private SimpleStringProperty testQuery;
     private SimpleStringProperty database;
     private SimpleStringProperty password;
+    private SimpleStringProperty user;
+    private SimpleStringProperty databaseServer;
 
-    public ConnectionObj(String connectionName, String driver, String database, String password, String testQuery){
+    public ConnectionObj(String connectionName, String driver, String database, String user, String password, String databaseServer, String testQuery){
         this.connectionName = new SimpleStringProperty(connectionName);
         this.driver = new SimpleStringProperty(driver);
         this.database = new SimpleStringProperty(database);
         this.password = new SimpleStringProperty(password);
         this.testQuery = new SimpleStringProperty(testQuery);
+        this.user = new SimpleStringProperty(user);
+        this.databaseServer = new SimpleStringProperty(databaseServer);
+    }
+
+    public String getUser() {
+        return user.get();
+    }
+
+    public SimpleStringProperty userProperty() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user.set(user);
+    }
+
+    public String getDatabaseServer() {
+        return databaseServer.get();
+    }
+
+    public SimpleStringProperty databaseServerProperty() {
+        return databaseServer;
+    }
+
+    public void setDatabaseServer(String databaseServer) {
+        this.databaseServer.set(databaseServer);
     }
 
     public String getConnectionName() {

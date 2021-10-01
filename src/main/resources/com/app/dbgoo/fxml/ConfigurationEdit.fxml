@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.PasswordField?>
+<VBox
+        AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
+        xmlns="http://javafx.com/javafx/8.0.121"
+        prefWidth="500"
+        prefHeight="300"
+        xmlns:fx="http://javafx.com/fxml/1">
+    <VBox>
+        <padding>
+            <Insets bottom="2.0" left="2.0" right ="2.0" top="2.0"/>
+        </padding>
+        <Label text="Database Driver" />
+        <ComboBox fx:id="driver" VBox.vgrow="ALWAYS" maxWidth="1.7976931348623157E308"/>
+
+        <padding>
+            <Insets bottom="2.0" left="2.0" right ="2.0" top="2.0"/>
+        </padding>
+        <Label text="Connection Name" />
+        <TextField fx:id="connectionName"/>
+
+        <padding>
+            <Insets bottom="2.0" left="2.0" right ="2.0" top="2.0"/>
+        </padding>
+        <Label text="Database Name"/>
+        <TextField fx:id="database" />
+
+        <padding>
+            <Insets bottom="2.0" left="2.0" right ="2.0" top="2.0"/>
+        </padding>
+        <Label text="Username" />
+        <TextField fx:id="user" />
+
+        <padding>
+            <Insets bottom="2.0" left="2.0" right ="2.0" top="2.0"/>
+        </padding>
+        <Label text="Password" />
+        <PasswordField fx:id="password"/>
+    </VBox>
+
+    <VBox>
+        <padding>
+            <Insets bottom="2.0" left="2.0" right ="2.0" top="2.0"/>
+        </padding>
+        <fx:define>
+            <Image requestedWidth="16" requestedHeight="16" fx:id="executeBtn" url="@../img/execute_btn.png"/>
+        </fx:define>
+        <HBox>
+            <Button text="Test Connection" minWidth="20"
+                    fx:id="executeQueryTestButton">
+                <graphic>
+                    <ImageView image="$executeBtn"/>
+                </graphic>
+            </Button>
+            <Button text="Save" minWidth="20"
+                    fx:id="executeQuerySaveButton">
+                <graphic>
+                    <ImageView image="$executeBtn"/>
+                </graphic>
+            </Button>
+        </HBox>
+
+    </VBox>
+    <padding>
+        <Insets bottom="5.0" left="2.0" right ="2.0" top="2.0"/>
+    </padding>
+
+</VBox>
