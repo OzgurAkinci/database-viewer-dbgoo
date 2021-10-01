@@ -3,30 +3,21 @@ package com.app.dbgoo;
 import com.app.dbgoo.entity.ConnectionObj;
 import com.app.dbgoo.util.AppUtil;
 import com.app.dbgoo.util.TableUtils;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.util.Callback;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.URL;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -50,7 +41,11 @@ public class ConfigurationController implements Initializable {
         password.setCellValueFactory(new PropertyValueFactory<ConnectionObj, String>("password"));
         TableColumn databaseServer = new TableColumn("Database Server");
         databaseServer.setCellValueFactory(new PropertyValueFactory<ConnectionObj, String>("databaseServer"));
-        connectionListTableView.getColumns().addAll(connectionName, driver, database, user, password, databaseServer);
+        TableColumn databasePort = new TableColumn("Database Port");
+        databasePort.setCellValueFactory(new PropertyValueFactory<ConnectionObj, String>("databasePort"));
+        TableColumn ssl = new TableColumn("SSL");
+        ssl.setCellValueFactory(new PropertyValueFactory<ConnectionObj, String>("ssl"));
+        connectionListTableView.getColumns().addAll(connectionName, driver, database, user, password, databaseServer, databasePort, ssl);
         loadConnectionData();
 
 
@@ -81,12 +76,24 @@ public class ConfigurationController implements Initializable {
         }
     }
 
-    private void provideNewConnectionMenuFunctionality(Object connectionObj_) {
+    private void provideNewConnectionMenuFunctionality(ConnectionObj connectionObj_) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/ConfigurationEdit.fxml"));
             if(connectionObj_ != null) {
-                JSONObject connectionObj = new JSONObject(connectionObj_);
-                ConfigurationEditController configurationEditController = new ConfigurationEditController(connectionObj);
+                JSONObject connectionObj = new JSONObject();
+                connectionObj.put("connection-name", connectionObj_.getConnectionName());
+                connectionObj.put("database", connectionObj_.getDatabase());
+                connectionObj.put("password", connectionObj_.getPassword());
+                connectionObj.put("driver", connectionObj_.getDriver());
+                connectionObj.put("database-server", connectionObj_.getDatabaseServer());
+                connectionObj.put("user", connectionObj_.getUser());
+                connectionObj.put("ssl", connectionObj_.getSsl());
+                connectionObj.put("database-port", connectionObj_.getDatabasePort());
+
+                ConfigurationEditController configurationEditController = new ConfigurationEditController(connectionObj, this);
+                fxmlLoader.setController(configurationEditController);
+            }else{
+                ConfigurationEditController configurationEditController = new ConfigurationEditController(null, this);
                 fxmlLoader.setController(configurationEditController);
             }
             Scene scene = new Scene(fxmlLoader.load());
@@ -100,7 +107,7 @@ public class ConfigurationController implements Initializable {
         }
     }
 
-    private void loadConnectionData(){
+    public void loadConnectionData(){
         JSONArray connectionsData = AppUtil.getApplicationData("connections");
         data = FXCollections.observableArrayList();
         for(int i=0; i<connectionsData.length(); i++) {
@@ -111,10 +118,10 @@ public class ConfigurationController implements Initializable {
                     connectionObject.getString("user"),
                     connectionObject.getString("password"),
                     connectionObject.getString("database-server"),
-                    connectionObject.getString("test-query"));
+                    connectionObject.getString("database-port"),
+                    connectionObject.getString("ssl"));
             data.add(connectionObj);
         }
-
         connectionListTableView.setItems(data);
     }
 

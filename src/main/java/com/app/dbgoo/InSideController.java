@@ -223,11 +223,7 @@ public class InSideController implements Initializable
             alert.setTitle("Error");
             alert.setHeaderText("Connection not found!");
             alert.setContentText("Connection not found. Please see application.json file.");
-            alert.showAndWait().ifPresent(rs -> {
-                if (rs == ButtonType.OK) {
-                    System.out.println("Pressed OK.");
-                }
-            });
+            alert.show();
         }
     }
 

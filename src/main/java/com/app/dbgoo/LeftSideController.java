@@ -3,12 +3,10 @@ import com.app.dbgoo.util.AppUtil;
 import com.app.dbgoo.util.CustomListViewSkin;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.input.*;
-import javafx.scene.layout.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

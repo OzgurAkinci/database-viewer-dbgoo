@@ -15,11 +15,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.CheckBox?>
 <VBox
         AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
         xmlns="http://javafx.com/javafx/8.0.121"
         prefWidth="500"
-        prefHeight="300"
+        prefHeight="400"
         xmlns:fx="http://javafx.com/fxml/1">
     <VBox>
         <padding>
@@ -38,7 +39,19 @@
             <Insets bottom="2.0" left="2.0" right ="2.0" top="2.0"/>
         </padding>
         <Label text="Database Name"/>
-        <TextField fx:id="database" />
+        <TextField fx:id="databaseTxt" />
+
+        <padding>
+            <Insets bottom="2.0" left="2.0" right ="2.0" top="2.0"/>
+        </padding>
+        <Label text="Database Server"/>
+        <TextField fx:id="server" />
+
+        <padding>
+            <Insets bottom="2.0" left="2.0" right ="2.0" top="2.0"/>
+        </padding>
+        <Label text="Database Port"/>
+        <TextField fx:id="port" />
 
         <padding>
             <Insets bottom="2.0" left="2.0" right ="2.0" top="2.0"/>
@@ -51,6 +64,12 @@
         </padding>
         <Label text="Password" />
         <PasswordField fx:id="password"/>
+
+        <padding>
+            <Insets bottom="2.0" left="2.0" right ="2.0" top="2.0"/>
+        </padding>
+        <Label text="SSL" />
+        <ComboBox fx:id="ssl" VBox.vgrow="ALWAYS" maxWidth="1.7976931348623157E308"/>
     </VBox>
 
     <VBox>
@@ -61,13 +80,13 @@
             <Image requestedWidth="16" requestedHeight="16" fx:id="executeBtn" url="@../img/execute_btn.png"/>
         </fx:define>
         <HBox>
-            <Button text="Test Connection" minWidth="20"
+            <Button text="Test Connection" minWidth="20" style="-fx-cursor: hand;"
                     fx:id="executeQueryTestButton">
                 <graphic>
                     <ImageView image="$executeBtn"/>
                 </graphic>
             </Button>
-            <Button text="Save" minWidth="20"
+            <Button text="Save" minWidth="20" style="-fx-cursor: hand;"
                     fx:id="executeQuerySaveButton">
                 <graphic>
                     <ImageView image="$executeBtn"/>
