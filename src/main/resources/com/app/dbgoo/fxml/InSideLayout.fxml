@@ -69,7 +69,7 @@
         </CodeArea>
         <TableView fx:id="tableView"
                    VBox.vgrow="ALWAYS"/>
-        <TextArea prefHeight="50.0" prefWidth="200.0" fx:id="consoleTextArea"
+        <TextArea prefHeight="130.0" prefWidth="200.0" fx:id="consoleTextArea"
                   style="-fx-font-family: Consolas; -fx-highlight-fill: #222222; -fx-highlight-text-fill: #ffffff; -fx-text-fill: #222222; -fx-background-color:#ffffff;"
                   text="" editable="false">
         </TextArea>

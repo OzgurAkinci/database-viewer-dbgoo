@@ -53,6 +53,8 @@ public class InSideController implements Initializable
     private final String[] observableSchemaList = {"None"};
     private final ObservableList<String> observableSchemaListObj = FXCollections.observableArrayList(observableSchemaList);
 
+    private String activeSchemaName = null;
+
     @FXML
     private Button executeQueryButton;
 
@@ -97,47 +99,34 @@ public class InSideController implements Initializable
 
         //ConnectionsList
         connectionsList.getSelectionModel().selectedItemProperty()
-                .addListener(new ChangeListener<String>() {
-                    public void changed(ObservableValue<? extends String> observable,
-                                        String oldSelectedConnectionValue, String selectedConnectionValue) {
-                        try {
-                            openConnection(selectedConnectionValue);
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
+                .addListener((observable, oldSelectedConnectionValue, selectedConnectionValue) -> {
+                    try {
+                        openConnection(selectedConnectionValue);
+                    }catch (Exception e){
+                        e.printStackTrace();
                     }
                 });
 
+        //SchemaList
+        schemaList.getSelectionModel().selectedItemProperty()
+                .addListener((observable, oldSelectedCurrentSchemaValue, selectedCurrentSchemaValue) -> activeSchemaName = selectedCurrentSchemaValue);
+
         //ExecuteQueryButton
-        executeQueryButton.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent e)
-            {
-                if(connection == null){
-                    consoleTextArea.setText("Connection not found.");
-                }
-                buildData(textArea.getText());
+        executeQueryButton.setOnAction(e -> {
+            if(connection == null){
+                consoleTextArea.setText("Connection not found.");
             }
+            buildData(textArea.getText());
         });
 
         //ExecuteListAllTableButton
-        executeListAllTablesButton.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent e)
-            {
-                if(allTablesQuery != null)
-                    textArea.replaceText(allTablesQuery);
-            }
+        executeListAllTablesButton.setOnAction(e -> {
+            if(allTablesQuery != null)
+                textArea.replaceText(allTablesQuery);
         });
 
         //ExecuteCodeBeautifyBtn
-        executeCodeBeautifyBtn.setOnAction(new EventHandler<ActionEvent>()
-        {
-            public void handle(ActionEvent e)
-            {
-                textArea.replaceText(new BasicFormatterImpl().format(textArea.getText()));
-            }
-        });
+        executeCodeBeautifyBtn.setOnAction(e -> textArea.replaceText(new BasicFormatterImpl().format(textArea.getText())));
 
 
     }
@@ -150,6 +139,9 @@ public class InSideController implements Initializable
         }
         data = FXCollections.observableArrayList();
         try {
+            if(activeSchemaName != null && !activeSchemaName.isEmpty()){
+                connection.setSchema(activeSchemaName);
+            }
             ResultSet rs = connection.createStatement().executeQuery(sql);
 
             for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
@@ -210,7 +202,8 @@ public class InSideController implements Initializable
         if(connectionData != null) {
             String driver = connectionData.getString("driver");
             connection = openSqlConnection(connectionData);
-            schemaList.getItems().clear();
+            //schemaList.getItems().clear();
+            //observableSchemaListObj.clear();
             if(driver.equals(AppConstant.CONNECTION_DRIVER_POSTGRESQL)){
                 getSchemasDataFromPostgreSQL(connection);
             }else if(driver.equals(AppConstant.CONNECTION_DRIVER_MYSQL)) {
@@ -238,6 +231,7 @@ public class InSideController implements Initializable
     }
 
     private void getSchemasDataFromPostgreSQL(Connection connection) throws SQLException {
+        observableSchemaListObj.clear();
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT nspname FROM pg_catalog.pg_namespace;");
         while(rs.next()) {
@@ -246,6 +240,7 @@ public class InSideController implements Initializable
         schemaList.setItems(observableSchemaListObj);
     }
     private void getSchemasDataFromMySQL(Connection connection) throws SQLException {
+        observableSchemaListObj.clear();
         ResultSet rs = connection.getMetaData().getCatalogs();
         while(rs.next()) {
             observableSchemaListObj.add(rs.getString("TABLE_CAT"));

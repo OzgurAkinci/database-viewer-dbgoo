@@ -3,18 +3,32 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <MenuBar fx:id="menuBar"
          xmlns="http://javafx.com/javafx/8.0.121"
          xmlns:fx="http://javafx.com/fxml/1"
          fx:controller="com.app.dbgoo.MenuController" VBox.vgrow="NEVER">
     <menus>
         <Menu mnemonicParsing="false" text="Menu">
+            <fx:define>
+                <Image requestedWidth="16" requestedHeight="16" fx:id="menu1" url="@../img/menu.png"/>
+            </fx:define>
+            <graphic>
+                <ImageView image="$menu1"/>
+            </graphic>
             <items>
                 <MenuItem mnemonicParsing="false" text="About" />
-                <MenuItem mnemonicParsing="false" text="Quit" />
+                <MenuItem mnemonicParsing="false" text="Exit Program" />
             </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="DB Configuration">
+        <Menu mnemonicParsing="false" text="Configuration">
+            <fx:define>
+                <Image requestedWidth="16" requestedHeight="16" fx:id="menu2" url="@../img/settings.png"/>
+            </fx:define>
+            <graphic>
+                <ImageView image="$menu2"/>
+            </graphic>
             <items>
                 <MenuItem mnemonicParsing="false" fx:id="confMenu" onAction="#handleMenuAction" text="Connection Configuration" />
             </items>

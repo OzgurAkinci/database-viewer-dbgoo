@@ -2,6 +2,9 @@ package com.app.dbgoo;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.layout.VBox;
+import org.fxmisc.richtext.CodeArea;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,6 +27,14 @@ public class RootController  implements Initializable {
         this.leftSideLayoutController.loadSqlHistoryData();
     }
 
-    public void setAbc() {
+    public void setTxt(String txt) {
+        try {
+            VBox n = (VBox) this.addTabsLayoutController.tabPane.getSelectionModel().getSelectedItem().getContent();
+            //Index = 1 =>  CodeArea element.
+            CodeArea codeArea = (CodeArea) n.getChildren().get(1);
+            codeArea.replaceText(txt);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 
 public class TabsController implements Initializable {
     @FXML
-    private TabPane tabPane;
+    public TabPane tabPane;
 
     private RootController rootController;
     public RootController getRootController() {

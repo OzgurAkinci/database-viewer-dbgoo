@@ -29,7 +29,6 @@ public class MenuController implements Initializable
     @FXML
     private void handleMenuAction(final ActionEvent event)
     {
-        System.out.println(event);
         MenuItem menuItem = ((MenuItem) event.getSource());
         if(menuItem.getId().equals("confMenu")) {
             provideConfMenuFunctionality();

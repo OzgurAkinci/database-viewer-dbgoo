@@ -3,6 +3,7 @@ import com.app.dbgoo.util.AppUtil;
 import com.app.dbgoo.util.CustomListViewSkin;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
@@ -39,6 +40,18 @@ public class LeftSideController implements Initializable {
                 Clipboard.getSystemClipboard().setContent(content);
             }
         });
+
+        listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.getClickCount() == 2) {
+                    JSONObject a = (JSONObject) listView.getSelectionModel().getSelectedItem();
+                    rootController.setTxt(a.getString("sql"));
+                }
+            }
+        });
+
         loadSqlHistoryData();
     }
 
