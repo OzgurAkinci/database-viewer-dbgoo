@@ -3,6 +3,7 @@ package com.app.dbgoo;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,6 +33,9 @@ public class MenuController implements Initializable
         MenuItem menuItem = ((MenuItem) event.getSource());
         if(menuItem.getId().equals("confMenu")) {
             provideConfMenuFunctionality();
+        }else if(menuItem.getId().equals("exitProgramMenu")) {
+            Platform.exit();
+            System.exit(0);
         }
     }
 

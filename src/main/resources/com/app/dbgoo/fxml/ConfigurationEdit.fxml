@@ -88,8 +88,11 @@
             </Button>
             <Button text="Save" minWidth="20" style="-fx-cursor: hand;"
                     fx:id="executeQuerySaveButton">
+                <fx:define>
+                    <Image requestedWidth="16" requestedHeight="16" fx:id="saveBtn" url="@../img/tick.png"/>
+                </fx:define>
                 <graphic>
-                    <ImageView image="$executeBtn"/>
+                    <ImageView image="$saveBtn"/>
                 </graphic>
             </Button>
         </HBox>

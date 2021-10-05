@@ -19,7 +19,7 @@
             </graphic>
             <items>
                 <MenuItem mnemonicParsing="false" text="About" />
-                <MenuItem mnemonicParsing="false" text="Exit Program" />
+                <MenuItem mnemonicParsing="false" fx:id="exitProgramMenu" onAction="#handleMenuAction" text="Exit Program" />
             </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Configuration">
