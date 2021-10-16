@@ -16,7 +16,7 @@ public class MainApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setMaximized(true);
         stage.setTitle("DB Goo - Database Viewer!");
-        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/icon.png"))));
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/icon.ico"))));
         stage.setScene(scene);
         stage.show();
     }

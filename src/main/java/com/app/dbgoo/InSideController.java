@@ -25,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.simple.parser.ParseException;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
@@ -186,11 +187,12 @@ public class InSideController implements Initializable
         sqlHistoryDatas.put(jsonObject);
 
 
-        JSONObject obj = AppUtil.readJsonFromFile("application.json");
+        JSONObject obj = AppUtil.readJsonFromFile();
         obj.remove("sql-history");
         obj.put("sql-history", sqlHistoryDatas);
 
-        PrintWriter prw= new PrintWriter("application.json");
+        String path = AppConstant.homePath + File.separator + AppConstant.propertiesFolderName + File.separator + AppConstant.propertiesFileName;
+        PrintWriter prw= new PrintWriter(path);
         prw.println(obj);
         prw.close();
 
@@ -215,7 +217,7 @@ public class InSideController implements Initializable
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Error");
             alert.setHeaderText("Connection not found!");
-            alert.setContentText("Connection not found. Please see application.json file.");
+            alert.setContentText("Connection not found. Please see " + AppConstant.propertiesFileName + " file.");
             alert.show();
         }
     }

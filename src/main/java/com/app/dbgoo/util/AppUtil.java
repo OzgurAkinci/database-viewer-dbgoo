@@ -1,5 +1,6 @@
 package com.app.dbgoo.util;
 
+import com.app.dbgoo.constant.AppConstant;
 import com.google.common.io.Files;
 import org.fxmisc.richtext.model.StyleSpans;
 import org.fxmisc.richtext.model.StyleSpansBuilder;
@@ -13,6 +14,7 @@ import com.google.common.base.Charsets;
 import java.io.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,13 +40,34 @@ public class AppUtil {
                     + "|(?<COMMENT>" + COMMENT_PATTERN + ")"
     );
 
-    public static String getFileAsString(String jsonfilename) throws IOException {
-        return Files.asCharSource(new File(jsonfilename), Charsets.UTF_8).read();
+    public static String getFileAsString(String jsonFilename) throws IOException {
+        try{
+            String path = AppConstant.homePath + File.separator + AppConstant.propertiesFolderName + File.separator + jsonFilename;
+            File tempFile = new File( path);
+            if(tempFile.exists()) {
+               return Files.asCharSource(new File(path), Charsets.UTF_8).read();
+            } else {
+                File file = new File(path);
+                file.getParentFile().mkdirs();
+                if(file.createNewFile()) {
+                    JSONObject emptyObject = new JSONObject();
+                    emptyObject.put("connections", new JSONArray());
+                    emptyObject.put("sql-history", new JSONArray());
+                    FileWriter fileWriter = new FileWriter(path);
+                    fileWriter.write(emptyObject.toString());
+                    fileWriter.close();
+                    return Files.asCharSource(file, Charsets.UTF_8).read();
+                }
+            }
+        }catch (Exception e){
+           e.printStackTrace();
+        }
+        return null;
     }
 
-    public static JSONObject readJsonFromFile(String fileName) throws IOException, ParseException {
+    public static JSONObject readJsonFromFile() throws IOException, ParseException {
         try {
-            return new JSONObject(getFileAsString("application.json"));
+            return new JSONObject(Objects.requireNonNull(getFileAsString(AppConstant.propertiesFileName)));
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
@@ -54,7 +77,7 @@ public class AppUtil {
     public static JSONArray getApplicationData(String objectName) {
         JSONArray j = null;
         try {
-            JSONObject obj = readJsonFromFile("application.json");
+            JSONObject obj = readJsonFromFile();
             j =  obj.getJSONArray(objectName);
         }catch (IOException e) {
             e.printStackTrace();

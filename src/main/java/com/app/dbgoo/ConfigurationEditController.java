@@ -1,5 +1,6 @@
 package com.app.dbgoo;
 
+import com.app.dbgoo.constant.AppConstant;
 import com.app.dbgoo.util.AppUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,12 +11,11 @@ import javafx.scene.input.MouseEvent;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.simple.parser.ParseException;
-import org.w3c.dom.Text;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
-import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -144,10 +144,11 @@ public class ConfigurationEditController implements Initializable {
             connections.put(newJsonObj);
         }
 
-        JSONObject obj = AppUtil.readJsonFromFile("application.json");
+        JSONObject obj = AppUtil.readJsonFromFile();
         obj.remove("connections");
         obj.put("connections", connections);
-        PrintWriter prw= new PrintWriter("application.json");
+        String path = AppConstant.homePath + File.separator + AppConstant.propertiesFolderName + File.separator + AppConstant.propertiesFileName;
+        PrintWriter prw= new PrintWriter(path);
         prw.println(obj);
         prw.close();
 

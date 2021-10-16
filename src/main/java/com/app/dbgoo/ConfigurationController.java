@@ -99,7 +99,7 @@ public class ConfigurationController implements Initializable {
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             stage.setTitle("DB Goo - Database Configuration Edit");
-            stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/icon.png"))));
+            stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/icon.ico"))));
             stage.setScene(scene);
             stage.show();
         }catch (Exception e){
