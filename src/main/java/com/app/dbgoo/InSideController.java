@@ -4,12 +4,9 @@ import com.app.dbgoo.constant.AppConstant;
 import com.app.dbgoo.util.TableUtils;
 import com.app.dbgoo.util.AppUtil;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -96,6 +93,7 @@ public class InSideController implements Initializable
         //TableView
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tableView.getSelectionModel().setCellSelectionEnabled(true);
+        tableView.setMaxHeight(Double.MAX_VALUE);
         TableUtils.installCopyPasteHandler(tableView);
 
         //ConnectionsList
@@ -115,7 +113,7 @@ public class InSideController implements Initializable
         //ExecuteQueryButton
         executeQueryButton.setOnAction(e -> {
             if(connection == null){
-                consoleTextArea.setText("Connection not found.");
+                setConsoleTextArea("Connection not found.");
             }
             buildData(textArea.getText());
         });
@@ -130,6 +128,10 @@ public class InSideController implements Initializable
         executeCodeBeautifyBtn.setOnAction(e -> textArea.replaceText(new BasicFormatterImpl().format(textArea.getText())));
 
 
+    }
+
+    public void setConsoleTextArea(String text) {
+        consoleTextArea.setText("> " + text);
     }
 
     public void buildData(String sql) {
@@ -160,15 +162,15 @@ public class InSideController implements Initializable
 
             }
             tableView.setItems(data);
-            consoleTextArea.setText("Query successfully executed.");
+            setConsoleTextArea("Query successfully executed.");
         } catch (Exception e) {
-            consoleTextArea.setText(e.getMessage());
+            setConsoleTextArea(e.getMessage());
         }
 
         try{
             addDataAndRefreshQueryHistory(sql);
         }catch (Exception e){
-            consoleTextArea.setText("Error: " + e.getMessage());
+            setConsoleTextArea("Error: " + e.getMessage());
         }
     }
 

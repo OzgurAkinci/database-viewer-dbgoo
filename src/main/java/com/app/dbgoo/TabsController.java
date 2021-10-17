@@ -60,7 +60,9 @@ public class TabsController implements Initializable {
         int numTabs = tabPane.getTabs().size()-1;
         Tab tab = new Tab("Query Tab "+(numTabs+1));
         tab.setContent(fxmlLoader.load());
+        tab.getStyleClass().addAll("global-bg", "tab-font-color");
         tabPane.getTabs().add(tabPane.getTabs().size()-1, tab);
+        tabPane.getStylesheets().add(this.getClass().getResource("style.css").toExternalForm());
         tabPane.getSelectionModel().select(numTabs);
     }
 }

@@ -2,10 +2,10 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<VBox fx:id="vBoxLeftSide" VBox.vgrow="ALWAYS"
+<VBox fx:id="vBoxLeftSide" VBox.vgrow="ALWAYS" styleClass="global-bg-highlighted"
       fx:controller="com.app.dbgoo.LeftSideController"
       xmlns:fx="http://javafx.com/fxml">
-    <Label text="History" />
+    <Label text="History" styleClass="white-text" />
     <ListView fx:id="listView" VBox.vgrow="ALWAYS" />
 </VBox>
 

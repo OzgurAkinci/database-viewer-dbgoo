@@ -1,3 +1,3 @@
-.keyword {-fx-fill: #8346F2;-fx-font-weight: bold;}
-.comment {-fx-fill: #777;}
-.value {-fx-fill: #018012;}
+.keyword {-fx-fill: #8346F2;-fx-font-weight: bold; -fx-font-family:'Arial';}
+.comment {-fx-fill: #777; -fx-font-family:'Arial';}
+.value {-fx-fill: #018012; -fx-font-family:'Arial';}

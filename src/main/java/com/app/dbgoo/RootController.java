@@ -2,7 +2,6 @@ package com.app.dbgoo;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import org.fxmisc.richtext.CodeArea;
 

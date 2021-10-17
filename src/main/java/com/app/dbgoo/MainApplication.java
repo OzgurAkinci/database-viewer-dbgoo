@@ -14,6 +14,7 @@ public class MainApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/RootLayout.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        scene.getStylesheets().add(this.getClass().getResource("style.css").toExternalForm());
         stage.setMaximized(true);
         stage.setTitle("DB Goo - Database Viewer!");
         stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/icon.ico"))));

@@ -11,32 +11,25 @@
         fx:controller="com.app.dbgoo.RootController"
         xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <fx:include source="MenuLayout.fxml" fx:id="menu" />
-        <AnchorPane cache="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-            <children>
-                <SplitPane dividerPositions="0.01" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <items>
-                        <AnchorPane maxWidth="700">
-                            <children>
-                                <StackPane AnchorPane.topAnchor="0.0"
-                                           AnchorPane.bottomAnchor="0.0"
-                                           AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" >
-                                <fx:include source="LeftSideLayout.fxml" fx:id="leftSideLayout" />
-                                </StackPane>
-                            </children>
-                        </AnchorPane>
-                        <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                            <children>
-                                <StackPane AnchorPane.topAnchor="0.0"
-                                           AnchorPane.bottomAnchor="0.0"
-                                           AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" >
-                                <fx:include source="TabsLayout.fxml" fx:id="addTabsLayout" />
-                                </StackPane>
-                            </children>
-                        </AnchorPane>
-                    </items>
-                </SplitPane>
-            </children>
+        <fx:include source="MenuLayout.fxml"/>
+        <AnchorPane styleClass="global-bg-highlighted" cache="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+            <SplitPane dividerPositions="0.3" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                       AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <AnchorPane prefWidth="200" maxWidth="700">
+                    <StackPane AnchorPane.topAnchor="0.0"
+                               AnchorPane.bottomAnchor="0.0"
+                               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <fx:include source="LeftSideLayout.fxml" fx:id="leftSideLayout"/>
+                    </StackPane>
+                </AnchorPane>
+                <AnchorPane>
+                    <StackPane AnchorPane.topAnchor="0.0"
+                               AnchorPane.bottomAnchor="0.0"
+                               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                        <fx:include source="TabsLayout.fxml" fx:id="addTabsLayout"/>
+                    </StackPane>
+                </AnchorPane>
+            </SplitPane>
         </AnchorPane>
    <!--     <VBox>
             <children>
